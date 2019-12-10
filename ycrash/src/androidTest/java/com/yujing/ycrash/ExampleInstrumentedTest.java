@@ -1,4 +1,4 @@
-package com.yujing.url;
+package com.yujing.ycrash;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
