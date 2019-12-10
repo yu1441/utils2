@@ -18,8 +18,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.yujing.url.YUrlAndroid;
-import com.yujing.url.YUrlListener;
 import com.yujing.utils.YConvert;
 import com.yujing.utils.YObjectStorage;
 import com.yujing.utils.YPicture;
@@ -243,78 +241,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.button5: {
-                YUrlAndroid yUrl = new YUrlAndroid();
-//                yUrl.get("https://www.baidu.com/", new YUrlListener() {
-//                    @Override
-//                    public void success(byte[] bytes, final String value) {
-//                        YToast.show(getApplicationContext(), value);
-//                    }
-//
-//                    @Override
-//                    public void fail(final String value) {
-//                        YToast.show(getApplicationContext(), value);
-//                    }
-//                });
-
-
-//                String urlDownload = "https://dldir1.qq.com/qqfile/qq/PCQQ9.1.3/25326/QQ9.1.3.25326.exe";
-//                File file = new File(YPath.getSDCard() + "/AA22/" + "123.exe");
-//                yUrl.downloadFile(urlDownload, file, new YUrlDownloadFileListener() {
-//                    @Override
-//                    public void progress(int downloadedSize, int fileSize) {
-//                        String jd = "进度:" + downloadedSize + "\t" + fileSize + "\t" + Ynumber.D2S((10000d * downloadedSize / fileSize) / 100);
-//                        Log.d("下载进度", jd);
-//                        textView.setText(jd);
-//                    }
-//
-//                    @Override
-//                    public void success(final File file) {
-//                        YToast.show(getApplicationContext(), "下载完成" + file.getPath());
-//                    }
-//
-//                    @Override
-//                    public void fail(final String value) {
-//                        YToast.show(getApplicationContext(), value);
-//                    }
-//                });
-
-
-//                String urlDownload = "https://dldir1.qq.com/qqfile/qq/PCQQ9.1.3/25326/QQ9.1.3.25326.exe";
-//                yUrl.load(urlDownload, new YUrlLoadListener() {
-//                    @Override
-//                    public void progress(int downloadedSize, int fileSize) {
-//                        String jd = "进度:" + downloadedSize + "\t" + fileSize + "\t" + Ynumber.D2S((10000d * downloadedSize / fileSize) / 100);
-//                        Log.d("下载进度", jd);
-//                        textView.setText(jd);
-//                    }
-//
-//                    @Override
-//                    public void success(final byte[] bytes) {
-//                        YToast.show(getApplicationContext(), "下载完成" + bytes.length);
-//                    }
-//
-//                    @Override
-//                    public void fail(final String value) {
-//                        YToast.show(getApplicationContext(), value);
-//                    }
-//                });
-
-
-                Map<String, Object> paramsMap = new HashMap<>();
-                paramsMap.put("name", "yujing");
-                paramsMap.put("password", "yujing");
-                yUrl.post("http://39.106.6.5:8080/user/login", paramsMap, new YUrlListener() {
-                    @Override
-                    public void success(byte[] bytes, final String value) {
-                        YToast.show(getApplicationContext(), value);
-                    }
-
-                    @Override
-                    public void fail(final String value) {
-                        YToast.show(getApplicationContext(), value);
-                    }
-                });
-
 
                 break;
             }
@@ -420,18 +346,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> paramsMap1 = new HashMap<>();
         paramsMap1.put("appInfo", YJson.toJson(appInfo));
         String url1 = "https://192.168.1.78:8080/crash/submit";
-//        post(url1, paramsMap1, crt);
-        YUrlAndroid.create().setCrtSSL(crt).post(url1, paramsMap1, new YUrlListener() {
-            @Override
-            public void success(byte[] bytes, String value) {
 
-            }
-
-            @Override
-            public void fail(String value) {
-
-            }
-        });
     }
 
     private void post(final String url, final Map<String, Object> paramsMap) {

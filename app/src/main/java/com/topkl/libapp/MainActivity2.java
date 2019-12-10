@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.yujing.adapter.YBaseYRecyclerViewAdapter;
 import com.yujing.adapter.YSetRecyclerView;
-import com.yujing.contract.YListener;
-import com.yujing.utils.YTts;
 
 import java.util.ArrayList;
 import java.util.List;
