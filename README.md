@@ -18,8 +18,8 @@ allprojects {
 
 ```
 dependencies {
-         implementation 'com.github.yu1441.utlis2:net:2.3.3'
-         implementation 'com.github.yu1441.utlis2:utils:2.3.3'
-         implementation 'com.github.yu1441.utlis2:ycrash:2.3.3'
+         implementation 'com.github.yu1441.utlis2:net:2.3.2'
+         implementation 'com.github.yu1441.utlis2:utils:2.3.2'
+         implementation 'com.github.yu1441.utlis2:ycrash:2.3.2'
 }
 ```
