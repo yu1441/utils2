@@ -31,73 +31,21 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * 各种类型转换
+ *
+ * @author yujing 2019年12月12日14:09:50
  */
 @SuppressWarnings("unused")
 public class YConvert {
-    /**
-     * 将一个2个字节数组转换为int。
-     *
-     * @param b b
-     * @return int
-     */
-    public static int bytesTwo2Int(byte[] b) {
-        int a1 = b[0] & 0xff;
-        int a2 = (b[1] & 0xff) * 256;
-        return (a1 + a2);
-    }
-
-    /**
-     * 将一个4个字节数组转换为int。
-     *
-     * @param b b
-     * @return int
-     */
-    public static int bytesFour2Int(byte[] b) {
-        int a1 = b[0] & 0xff;
-        int a2 = (b[1] & 0xff) * 256;
-        int a3 = (b[2] & 0xff) * 65536;
-        int a4 = (b[3] & 0xff) * 16777216;
-        return (a1 + a2 + a3 + a4);
-    }
-
-    /**
-     * long2Bytes
-     *
-     * @param num num
-     * @return byte[]
-     */
-    public static byte[] long2Bytes(long num) {
-        byte[] byteNum = new byte[8];
-        for (int ix = 0; ix < 8; ++ix) {
-            int offset = 64 - (ix + 1) * 8;
-            byteNum[ix] = (byte) ((num >> offset) & 0xff);
-        }
-        return byteNum;
-    }
-
-    /**
-     * int2Bytes
-     *
-     * @param num num
-     * @return byte[]
-     */
-    public static byte[] int2Bytes(int num) {
-        byte[] byteNum = new byte[4];
-        for (int ix = 0; ix < 4; ++ix) {
-            int offset = 32 - (ix + 1) * 8;
-            byteNum[ix] = (byte) ((num >> offset) & 0xff);
-        }
-        return new byte[]{byteNum[3], byteNum[2]};
-    }
-
     /**
      * bytesToHexString
      *
@@ -190,7 +138,7 @@ public class YConvert {
      * @return 全角字符串.
      */
     public static String ToSBC(String input) {
-        char c[] = input.toCharArray();
+        char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (c[i] == ' ') {
                 c[i] = '\u3000';
@@ -208,7 +156,7 @@ public class YConvert {
      * @return 半角字符串
      */
     public static String ToDBC(String input) {
-        char c[] = input.toCharArray();
+        char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (c[i] == '\u3000') {
                 c[i] = ' ';
@@ -252,7 +200,7 @@ public class YConvert {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat dateFormatNew = new SimpleDateFormat(newDateFormat);
         try {
             Date date = dateFormatOld.parse(oldDateString);
-            newDateString = dateFormatNew.format(date);
+            newDateString = dateFormatNew.format(Objects.requireNonNull(date));
         } catch (ParseException e) {
             newDateString = "";
         }
@@ -338,7 +286,8 @@ public class YConvert {
         File f = new File(path);
         FileOutputStream fOut = null;
         try {
-            if (!f.getParentFile().exists()) {
+            if (!Objects.requireNonNull(f.getParentFile()).exists()) {
+                //noinspection ResultOfMethodCallIgnored
                 f.getParentFile().mkdirs();
             }
             fOut = new FileOutputStream(f);
@@ -364,7 +313,6 @@ public class YConvert {
      * @param uri     uri
      * @return Bitmap
      */
-    @SuppressWarnings("JavaDoc")
     public synchronized static Bitmap uri2Bitmap(Context context, Uri uri) {
         try {// 读取uri所在的图片
             return MediaStore.Images.Media.getBitmap(context.getContentResolver(), uri);
@@ -655,8 +603,9 @@ public class YConvert {
      * @throws IOException IOException
      */
     public static String inputStream2String(InputStream inputStream) throws IOException {
-        return new String(inputStream2Bytes(inputStream), "UTF-8");
+        return new String(inputStream2Bytes(inputStream), StandardCharsets.UTF_8);
     }
+
 
     /**
      * string 转换BCD嘛
