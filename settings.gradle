@@ -1,1 +1,2 @@
 include ':app', ':net', ':utils', ':ycrash'
+rootProject.name='listApp'
