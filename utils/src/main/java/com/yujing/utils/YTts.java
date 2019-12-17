@@ -25,7 +25,18 @@ public class YTts {
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = textToSpeech.setLanguage(Locale.CHINA);
+                    Log.e(TAG, "TTS状态:" + result);
+                    if (result == TextToSpeech.LANG_MISSING_DATA) {
+                        Log.e(TAG, "语言包丢失");
+                        initSuccess = false;
+                    } else if (result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e(TAG, "语音不支持");
+                        initSuccess = false;
+                    }
+                    initSuccess = true;
+                }
             }
         });
     }
