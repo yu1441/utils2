@@ -1,5 +1,5 @@
 # utlis2
-# 项目已经迁移到：https://github.com/YUtils/utlis2
+# 项目已经迁移到：https://github.com/YUtils/utils2
 utlis工具类 utlis2 采用java7.0，安卓9.0，API28
 
 [![](https://jitpack.io/v/yu1441/utils2.svg)](https://jitpack.io/#yu1441/utils2)
